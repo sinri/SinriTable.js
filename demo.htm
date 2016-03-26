@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SinriTable Demo</title>
+	<link rel="stylesheet" type="text/css" href="SinriTable.css">
+	<style type="text/css">
+	#demo_st {
+		width: 60%;
+		height: 450px;
+		overflow: scroll;
+		float: left;
+		padding: 5px;
+	}
+	#demo_sp {
+		float: left;
+		width: 2px;
+		height: 450px;
+		background-color: #F6B9D2;
+	}
+	#demo_dt {
+		width: 35%;
+		height: 450px;
+		overflow: scroll;
+		float: left;
+		padding: 5px;
+		/*border: 1px solid #FEBEFE;*/
+	}
+	#preview_ta {
+		width: 400px;
+		height: 200px;
+		overflow: scroll;	
+	}
+	#thead_ta {
+		width: 400px;
+		height: 100px;
+		overflow: scroll;	
+	}
+	</style>
+	<script src="SinriTable.js"></script>
+	<script type="text/javascript">
+	var dm={
+		title:[
+			[{name:'No.',rowspan:2},{name:'Part I',colspan:2},{name:'Part II',colspan:2}],
+			['AName','BName','CName','DName']
+		],
+		body:[
+			['0','A','B','C','D'],
+			['1','A1','B1','C1','D1'],
+			['2','A2','B2','C2','D2'],
+			['3','A3','B3','C3','D3'],
+			['4','A4','B4','C4','D4'],
+			['5','A5','B5','C5','D5'],
+		]
+	};
+	
+	var theST=SinriTable('demo_st',false);
+
+	function ready_event(){
+		document.getElementById('preview_ta').value=JSON.stringify(dm.body);
+		document.getElementById('thead_ta').value=JSON.stringify(dm.title);
+	}
+
+	function renewTable(){
+		var t=JSON.parse(document.getElementById('thead_ta').value);
+		var b=JSON.parse(document.getElementById('preview_ta').value);
+		var k={
+			title:t,body:b
+		}
+
+		var cb_table_editable=document.getElementById('table_editable');
+		if(cb_table_editable.checked){
+			theST.editable=true;
+		}else{
+			theST.editable=false;
+		}
+
+		theST.init(k,function(r,c,v){
+			console.log(r+','+c+'='+v);
+			document.getElementById('preview_ta').value=theST.bodyJson()
+		});
+	}
+	</script>
+</head>
+<body onload="ready_event()">
+	<h1>SinriTable Demo</h1>
+	<p>此组件主要用于固定格式的表格内容的查看和更新。</p>
+	<hr>
+	<div>
+		<input type="checkbox" id="table_editable" checked="checked">使生成的表可编辑
+		&nbsp;
+		<button onclick="renewTable()">以源数据生成表</button>
+		<!-- <button onclick="document.getElementById('preview_ta').value=theST.bodyJson()">Body To Json</button> -->
+	</div>
+	<hr>
+	<div>
+		<div id="demo_st" class="SinriTable"></div>
+		<div id="demo_sp"></div>
+		<div id="demo_dt">
+			<h3>源数据表头</h3>
+			<textarea id="thead_ta"></textarea>
+			<h3>源数据</h3>
+			<textarea id="preview_ta"></textarea>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+	<hr>
+	<p>
+		Copyright 2016 Sinri Edogawa / Under MIT License / Updated 20160326
+	</p>
+</body>
+</html>
