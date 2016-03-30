@@ -40,16 +40,16 @@
 	<script type="text/javascript">
 	var dm={
 		title:[
-			[{name:'No.',rowspan:2},{name:'Part I',colspan:2},{name:'Part II',colspan:2}],
-			['AName','BName','CName','DName']
+			[{name:'No.',rowspan:2},{name:'Part I',colspan:2},{name:'Part II',colspan:2},{name:"FORMULA",colspan:2}],
+			['AName','BName','CName','DName','FORMULA','EXPECTED']
 		],
 		body:[
-			['0','A','B','C','D'],
-			['1','A1','B1','C1','D1'],
-			['2','A2','B2','C2','D2'],
-			['3','A3','B3','C3','D3'],
-			['4','A4','B4','C4','D4'],
-			['5','A5','B5','C5','D5'],
+			['0','1','2','3','4','5','=5'],
+			['10','11','12','13','14','=[1,1]','11'],
+			['20','21','22','23','24','=[2,3]+[2,4]/[2,2]',''+(23+24/22)],
+			['30','31','32','33','34','=count(0,0,5,1)','12'],
+			['40','41','42','34','44','=sum(0,0,5,1)','306'],
+			['50','51','52','53','54','=ave(0,0,5,1)','25.5'],
 		]
 	};
 	
@@ -90,6 +90,14 @@
 		&nbsp;
 		<button onclick="renewTable()">以源数据生成表</button>
 		<!-- <button onclick="document.getElementById('preview_ta').value=theST.bodyJson()">Body To Json</button> -->
+		|
+		ROW <input type="text" id="v_row" value="0">
+		COL <input type="text" id="v_col" value="0">
+		<button onclick="document.getElementById('v_of_row_col').value=theST.getCellValue(document.getElementById('v_row').value,document.getElementById('v_col').value)">=</button>
+		<input type="text" id="v_of_row_col" value="0">
+		&nbsp;
+		|
+		<button onclick="theST.refresh()">重新计算</button>
 	</div>
 	<hr>
 	<div>
