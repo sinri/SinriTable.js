@@ -1,0 +1,35 @@
+/**
+ * 人类虚无之固定表头table样式
+ * 不需要借助JS什么的就可以实现固定表头浮动表体
+ * 只要把表格的样式加一个class="sinri_fixed_head_table"
+ * Copyright 2016 Sinri Edogawa
+ * Under MIT License
+ **/
+table.sinri_fixed_head_table {
+	/*border: 1px solid gray;
+	border-collapse: collapse;*/
+	border: none;
+	width:auto;
+	max-width: 98%;
+}
+table.sinri_fixed_head_table thead {
+	display:block;top:0;
+}
+table.sinri_fixed_head_table tfoot {
+	display:block;bottom:0;
+}
+table.sinri_fixed_head_table tbody {
+	display:block;height:100px;overflow-y:scroll;
+}
+table.sinri_fixed_head_table th {
+	border: 1px solid gray;
+	background-color: #3295DD;
+	color: #fff;
+	width:150px;
+}
+table.sinri_fixed_head_table td {
+	border: 1px solid gray;
+	width:150px !important;
+	word-break:break-all; /*支持IE，chrome，FF不支持*/
+	word-wrap:break-word;/*支持IE，chrome，FF*/
+}
